@@ -8,9 +8,9 @@ module.exports = {
             tsconfig: "<rootDir>/tsconfig.spec.json",
         },
     },
-    coverageDirectory: "../../../coverage/libs/common/events",
+    coverageDirectory: "../../../coverage/libs/contrib/events",
 
-    displayName: "common-events",
+    displayName: "contrib-rxevents",
 
     transform: { "^.+\\.(ts|js|html)$": "jest-preset-angular" },
     snapshotSerializers: [

@@ -15,31 +15,31 @@ export function args<T extends Primitive>(name: string): Args<T>;
 export function args<T extends ObjectLike>(): Args<T>;
 export function args<T>(name?: string): Args<T> {
     return name
-        ? { _p: (undefined as unknown) as T, _as: "primitive" }
-        : { _p: (undefined as unknown) as T, _as: "obj" };
+        ? { _p: undefined as unknown as T, _as: "primitive" }
+        : { _p: undefined as unknown as T, _as: "obj" };
 }
 
 export type EventCreator<C extends Creator = Creator> = C & {
     readonly verb: string;
 };
 
-export type UnparameterizedEventCreator = EventCreator<
-    (source: string) => RxEvent
+export type BasicEventCreator = EventCreator<(source: string) => RxEvent>;
+export type ComplexEventCreator<T extends ObjectLike> = EventCreator<
+    (source: string, args: T) => RxEvent & T
 >;
-export type ParameterizedEventCreator<
-    T extends ObjectLike | Primitive
-> = EventCreator<
-    (
-        source: string,
-        args: T
-    ) => T extends Primitive ? RxEvent & { value: T } : RxEvent & T
+export type ScalarEventCreator<T extends Primitive> = EventCreator<
+    (source: string, args: T) => RxEvent & { value: T }
 >;
 
-export function declareEvent(verb: string): UnparameterizedEventCreator;
-export function declareEvent<P extends ObjectLike | Primitive>(
+export function declareEvent(verb: string): BasicEventCreator;
+export function declareEvent<P extends Primitive>(
     verb: string,
     params: Args<P>
-): ParameterizedEventCreator<P>;
+): ScalarEventCreator<P>;
+export function declareEvent<P extends ObjectLike>(
+    verb: string,
+    params: Args<P>
+): ComplexEventCreator<P>;
 export function declareEvent<P extends ObjectLike | undefined = undefined>(
     verb: string,
     params?: Args<P>

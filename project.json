@@ -1,33 +1,34 @@
 {
-  "projectType": "library",
-  "root": "libs/common/rxstate",
-  "sourceRoot": "libs/common/rxstate/src",
-  "prefix": "cloudextend",
-  "targets": {
-    "build": {
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "options": {
-        "tsConfig": "libs/common/rxstate/tsconfig.lib.json",
-        "project": "libs/common/rxstate/ng-package.json"
-      }
+    "projectType": "library",
+    "root": "libs/contrib/rxstate",
+    "sourceRoot": "libs/contrib/rxstate/src",
+    "prefix": "cloudextend",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/angular:ng-packagr-lite",
+            "outputs": ["dist/libs/contrib/rxstate"],
+            "options": {
+                "tsConfig": "libs/contrib/rxstate/tsconfig.lib.json",
+                "project": "libs/contrib/rxstate/ng-package.json"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/contrib/rxstate/**/*.ts",
+                    "libs/contrib/rxstate/**/*.html"
+                ]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "options": {
+                "jestConfig": "libs/contrib/rxstate/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
     },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/common/rxstate/**/*.ts",
-          "libs/common/rxstate/**/*.html"
-        ]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "options": {
-        "jestConfig": "libs/common/rxstate/jest.config.js",
-        "passWithNoTests": true
-      }
-    }
-  },
-  "generators": {},
-  "tags": []
+    "generators": {},
+    "tags": []
 }

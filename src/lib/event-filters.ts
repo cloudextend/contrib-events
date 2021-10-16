@@ -1,14 +1,15 @@
 import { Action } from "@ngrx/store";
 import { of, EMPTY, OperatorFunction } from "rxjs";
-import { flatMap } from "rxjs/operators";
+import { mergeMap } from "rxjs/operators";
 
 import { RxEvent } from "./event";
 import {
     EventCreator,
-    UnparameterizedEventCreator,
-    ParameterizedEventCreator,
+    BasicEventCreator,
+    ComplexEventCreator,
     ObjectLike,
     Primitive,
+    ScalarEventCreator,
 } from "./event-creators";
 
 /**
@@ -17,26 +18,27 @@ import {
  * @param eventOrVerb The event or the verb of the event.
  */
 export function onEvent(
-    eventOrVerb: string | UnparameterizedEventCreator
+    eventOrVerb: string | BasicEventCreator
 ): OperatorFunction<Action, RxEvent>;
 export function onEvent<ArgsType extends ObjectLike>(
-    event: ParameterizedEventCreator<ArgsType>
+    event: ComplexEventCreator<ArgsType>
 ): OperatorFunction<Action, RxEvent & ArgsType>;
 export function onEvent<ArgsType extends Primitive>(
-    event: ParameterizedEventCreator<ArgsType>
+    event: ScalarEventCreator<ArgsType>
 ): OperatorFunction<Action, RxEvent & { value: ArgsType }>;
 export function onEvent<ArgsType extends ObjectLike | Primitive>(
-    eventOrVerb:
-        | string
-        | UnparameterizedEventCreator
-        | ParameterizedEventCreator<ArgsType>
+    eventOrVerb: ArgsType extends ObjectLike
+        ? ComplexEventCreator<ArgsType>
+        : ArgsType extends Primitive
+        ? ScalarEventCreator<ArgsType>
+        : string | BasicEventCreator
 ) {
     const expectedVerb =
         typeof eventOrVerb === "string"
             ? eventOrVerb
-            : ((eventOrVerb as unknown) as EventCreator).verb;
+            : (eventOrVerb as unknown as EventCreator).verb;
 
-    return flatMap((action: Action) =>
+    return mergeMap((action: Action) =>
         (action as RxEvent).verb === expectedVerb
             ? of(action as RxEvent & ArgsType)
             : EMPTY
@@ -68,5 +70,5 @@ export function occurenceOf(
     const verb = typeof eventOrVerb === "string" 
         ? eventOrVerb 
         : eventOrVerb.verb;
-    return ((event as unknown) as EventCreator).verb === verb;
+    return (event as unknown as EventCreator).verb === verb;
 }
