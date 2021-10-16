@@ -1,0 +1,33 @@
+{
+  "projectType": "library",
+  "root": "libs/common/rxstate",
+  "sourceRoot": "libs/common/rxstate/src",
+  "prefix": "cloudextend",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "options": {
+        "tsConfig": "libs/common/rxstate/tsconfig.lib.json",
+        "project": "libs/common/rxstate/ng-package.json"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/common/rxstate/**/*.ts",
+          "libs/common/rxstate/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/common/rxstate/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "generators": {},
+  "tags": []
+}
