@@ -1,2 +1,7 @@
-# rxstate
-A thin wrapper on NgRx for improving Good Action Hygiene
+# common-events
+
+This library was generated with [Nx](https://nx.dev).
+
+## Running unit tests
+
+Run `nx test common-events` to execute the unit tests.
