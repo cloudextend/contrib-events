@@ -1,6 +1,6 @@
-import { RxEvent } from "..";
-import { declareCommand } from "../commands";
-import { args } from "../event-creators";
+import { RxEvent } from "../../event";
+import { declareCommand } from "../../commands";
+import { args } from "../../event-creators";
 
 const NAVIGATION_VERB = "#navigate";
 
