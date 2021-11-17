@@ -3,9 +3,8 @@ import { NavigationExtras, Route, Router } from "@angular/router";
 import { Actions, createEffect } from "@ngrx/effects";
 import { from } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { reactTo } from "../../commands";
 import { onEvent } from "../../event-filters";
-import { navigate } from "./navigate.command";
+import { navigation } from "./navigation-event";
 
 type UiRoute = Route & { viewState: string };
 
@@ -31,12 +30,10 @@ export class NavigationEffects {
         // );
     }
 
-    // private readonly routesMap = new Map<string, typeof navigate>();
-
     navigateOnEvent$ = createEffect(
         () =>
             this.actions$.pipe(
-                onEvent(navigate),
+                onEvent(navigation),
                 switchMap(event => {
                     const { params, queryParams } = event;
                     const pathParams = event.pathSegments;
@@ -58,30 +55,4 @@ export class NavigationEffects {
             ),
         { dispatch: false }
     );
-
-    // private createView(route: UiRoute) {
-    //     if (!route.path) {
-    //         throw new Error(
-    //             "Propety 'path' must be set on a route marked as a View State"
-    //         );
-    //     }
-
-    //     const pathSegments = extractUrlSegments(route.path);
-
-    //     const action = (
-    //         source: string,
-    //         params: Record<string, unknown>,
-    //         queryParams?: Record<string, unknown>
-    //     ) => navigate(source, { pathSegments, params, queryParams });
-    //     this.viewify(action, route.viewState);
-
-    //     return action;
-    // }
-
-    // private viewify(creator: unknown, stateName: string): void {
-    //     Object.defineProperty(creator, "viewState", {
-    //         value: stateName,
-    //         writable: false,
-    //     });
-    // }
 }

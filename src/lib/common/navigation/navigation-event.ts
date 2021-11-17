@@ -1,6 +1,5 @@
 import { RxEvent } from "../../event";
-import { declareCommand } from "../../commands";
-import { args } from "../../event-creators";
+import { args, declareEvent } from "../../event-creators";
 
 const NAVIGATION_VERB = "#navigate";
 
@@ -10,7 +9,7 @@ export interface NavigationEvent extends RxEvent {
     params?: Record<string, unknown>;
 }
 
-export const navigate = declareCommand(
+export const navigation = declareEvent(
     NAVIGATION_VERB,
     args<{
         pathSegments: string[];

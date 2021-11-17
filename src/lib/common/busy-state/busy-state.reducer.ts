@@ -1,5 +1,6 @@
-import { createEventReducer, when } from "@cloudextend/contrib/events";
 import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { createEventReducer, when } from "../../reducer";
+
 import { BusyState } from "./busy-state";
 import { idle, busy } from "./busy-state.events";
 

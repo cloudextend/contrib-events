@@ -1,2 +1,2 @@
-export * from "./navigate.command";
-export * from "./navigation-module.module";
+export * from "./navigation-event";
+export * from "./navigation-events.module";

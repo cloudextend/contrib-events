@@ -14,8 +14,8 @@ describe("routeCreator", () => {
         ["santa/:p1/ho/ho/:p2/ho", ["santa", "p1", "ho/ho", "p2", "ho"]],
     ];
 
-    inputAndExpectation.forEach((data: [string, string[]]) => {
-        const [input, expectation] = data;
+    inputAndExpectation.forEach(data => {
+        const [input, expectation] = data as ([string, string[]]);
         it("generates the exepeted set of URL Segments", () => {
             const extracted = extractUrlSegments(input);
             expect(extracted.length).toEqual(expectation.length);

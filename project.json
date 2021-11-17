@@ -1,30 +1,30 @@
 {
     "projectType": "library",
-    "root": "libs/contrib/rxstate",
-    "sourceRoot": "libs/contrib/rxstate/src",
+    "root": "libs/contrib/events",
+    "sourceRoot": "libs/contrib/events/src",
     "prefix": "cloudextend",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
-            "outputs": ["dist/libs/contrib/rxstate"],
+            "outputs": ["dist/libs/contrib/events"],
             "options": {
-                "tsConfig": "libs/contrib/rxstate/tsconfig.lib.json",
-                "project": "libs/contrib/rxstate/ng-package.json"
+                "tsConfig": "libs/contrib/events/tsconfig.lib.json",
+                "project": "libs/contrib/events/ng-package.json"
             }
         },
         "lint": {
             "executor": "@nrwl/linter:eslint",
             "options": {
                 "lintFilePatterns": [
-                    "libs/contrib/rxstate/**/*.ts",
-                    "libs/contrib/rxstate/**/*.html"
+                    "libs/contrib/events/**/*.ts",
+                    "libs/contrib/events/**/*.html"
                 ]
             }
         },
         "test": {
             "executor": "@nrwl/jest:jest",
             "options": {
-                "jestConfig": "libs/contrib/rxstate/jest.config.js",
+                "jestConfig": "libs/contrib/events/jest.config.js",
                 "passWithNoTests": true
             }
         }

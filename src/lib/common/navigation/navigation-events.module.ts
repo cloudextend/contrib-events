@@ -7,4 +7,4 @@ import { NavigationEffects } from "./navigation-effects.service";
     declarations: [],
     imports: [CommonModule, EffectsModule.forFeature([NavigationEffects])],
 })
-export class NavigationModuleModule {}
+export class NavigationEventsModule {}
