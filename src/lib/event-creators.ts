@@ -1,7 +1,6 @@
 import { Creator } from "@ngrx/store";
 
 import { RxEvent } from "./event";
-import { getEventActionType } from "./event-action-type";
 
 export type ObjectLike = Record<string, unknown>;
 export type Primitive = string | number | boolean;
@@ -9,6 +8,10 @@ export type Primitive = string | number | boolean;
 export interface Args<T> {
     _p: T;
     _as: "obj" | "primitive";
+}
+
+function getEventActionType(source: string, verb: string): string {
+    return `[${source}] ${verb}`;
 }
 
 export function args<T extends Primitive>(name: string): Args<T>;
