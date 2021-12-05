@@ -4,14 +4,11 @@ module.exports = {
     globals: {
         "ts-jest": {
             stringifyContentPathRegex: "\\.(html|svg)$",
-
             tsconfig: "<rootDir>/tsconfig.spec.json",
         },
     },
     coverageDirectory: "../../../coverage/libs/contrib/events",
-
-    displayName: "contrib-rxevents",
-
+    displayName: "contrib-events",
     transform: {
         "^.+.(ts|mjs|js|html)$": "jest-preset-angular",
     },
